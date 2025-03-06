@@ -1,0 +1,182 @@
+﻿@page "/kvadrPovrchObjem"
+
+<PageTitle>Výpočet kvádrů</PageTitle>
+
+<h1>Výpočet objemu a povrchu kvádrů</h1>
+
+<div class="p-4 m-2">
+    <form>
+        <div class="row g-1 p-2 align-items-center">
+            <span class="h4">Kvádr 1</span>
+            <div class="col-auto border border-2 rounded rounded-2 bg-light align-items-center">
+                <label for="zadejStranuA" class="form-label">Zadejte stranu A:</label>
+            </div>
+            <div class="col-auto">
+                <input type="number" class="form-control" @bind="kvadr1.StranaA" />
+            </div>
+            @if (!Kontrola(kvadr1.StranaA))
+            {
+                <div class="col-auto">
+                    <div class="form-text">Zadávejte čísla od 1 do 200</div>
+                </div>
+            }
+        </div>
+
+        <div class="row g-1 p-2 align-items-center">
+            <div class="col-auto border border-2 rounded rounded-2 bg-light align-items-center">
+                <label for="zadejStranuB" class="form-label">Zadejte stranu B:</label>
+            </div>
+            <div class="col-auto">
+                <input type="number" class="form-control" @bind="kvadr1.StranaB" />
+            </div>
+            @if (!Kontrola(kvadr1.StranaB))
+            {
+                <div class="col-auto">
+                    <div class="form-text">Zadávejte čísla od 1 do 200</div>
+                </div>
+            }
+        </div>
+
+        <div class="row g-1 p-2 align-items-center">
+            <div class="col-auto border border-2 rounded rounded-2 bg-light align-items-center">
+                <label for="zadejStranuC" class="form-label">Zadejte stranu C:</label>
+            </div>
+            <div class="col-auto">
+                <input type="number" class="form-control" @bind="kvadr1.StranaC" />
+            </div>
+            @if (!Kontrola(kvadr1.StranaC))
+            {
+                <div class="col-auto">
+                    <div class="form-text">Zadávejte čísla od 1 do 200</div>
+                </div>
+            }
+        </div>
+
+        <div class="col-auto">
+            <div class="form-text">Povrch kvádru 1 / Povrch kvádru 2 = @ZískejPomerPovrchuKvadru1Kvadru2(kvadr1, kvadr2)</div>
+        </div>
+        <div class="col-auto">
+            <div class="form-text">Objem kvádru 1 / Objem kvádru 2 = @ZískejPomerObjemKvadru1Kvadru2(kvadr1, kvadr2)</div>
+        </div>
+
+        <div class="p-2">
+            <span class="h5 p-2">Povrch kvádru 2: @kvadr1.PovrchKvadru</span>
+            <br />
+            <span class="h5 p-2">Objem kvádru 2: @kvadr1.ObjemKvadru</span>
+        </div>
+
+    </form>
+</div>
+
+<hr />
+
+<div class="p-4 m-2">
+    <form>
+        <div class="row g-1 p-2 align-items-center">
+            <span class="h4">Kvádr 1</span>
+            <div class="col-auto border border-2 rounded rounded-2 bg-light align-items-center">
+                <label for="zadejStranuA" class="form-label">Zadejte stranu A:</label>
+            </div>
+            <div class="col-auto">
+                <input type="number" class="form-control" @bind="kvadr2.StranaA" />
+            </div>
+            @if (!Kontrola(kvadr2.StranaA))
+            {
+                <div class="col-auto">
+                    <div class="form-text">Zadávejte čísla od 1 do 200</div>
+                </div>
+            }
+        </div>
+
+        <div class="row g-1 p-2 align-items-center">
+            <div class="col-auto border border-2 rounded rounded-2 bg-light align-items-center">
+                <label for="zadejStranuB" class="form-label">Zadejte stranu B:</label>
+            </div>
+            <div class="col-auto">
+                <input type="number" class="form-control" @bind="kvadr2.StranaB" />
+            </div>
+            @if (!Kontrola(kvadr2.StranaB))
+            {
+                <div class="col-auto">
+                    <div class="form-text">Zadávejte čísla od 1 do 200</div>
+                </div>
+            }
+        </div>
+
+        <div class="row g-1 p-2 align-items-center">
+            <div class="col-auto border border-2 rounded rounded-2 bg-light align-items-center">
+                <label for="zadejStranuC" class="form-label">Zadejte stranu C:</label>
+            </div>
+            <div class="col-auto">
+                <input type="number" class="form-control" @bind="kvadr2.StranaC" />
+            </div>
+            @if (!Kontrola(kvadr2.StranaC))
+            {
+                <div class="col-auto">
+                    <div class="form-text">Zadávejte čísla od 1 do 200</div>
+                </div>
+            }
+        </div>
+
+        <div class="col-auto">
+            <div class="form-text">Povrch kvádru 1 / Povrch kvádru 2 = @ZískejPomerPovrchuKvadru1Kvadru2(kvadr2, kvadr1)</div>
+        </div>
+
+        <div class="col-auto">
+            <div class="form-text">Objem kvádru 1 / Objem kvádru 2 = @ZískejPomerObjemKvadru1Kvadru2(kvadr2, kvadr1)</div>
+        </div>
+
+        <div class="p-2">
+            <span class="h5 p-2">Povrch kvádru 2: @kvadr2.PovrchKvadru</span>
+            <br />
+            <span class="h5 p-2">Objem kvádru 2: @kvadr2.ObjemKvadru</span>
+        </div>
+
+    </form>
+</div>
+
+
+@code {
+    private Models.Kvadr kvadr1 = new Models.Kvadr();
+    private Models.Kvadr kvadr2 = new Models.Kvadr();
+
+    public bool Kontrola(int strana)
+    {
+        if (strana <= 0 || strana > 200)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public string ZískejPomerPovrchuKvadru1Kvadru2(Models.Kvadr kvadr1, Models.Kvadr kvadr2)
+    {
+        if (kvadr1.PovrchKvadru != 0 && kvadr2.PovrchKvadru != 0)
+        {
+            var vysledek = Math.Round(kvadr1.PovrchKvadru / kvadr2.PovrchKvadru, 2);
+            return $"{vysledek}";
+        }
+        else
+        {
+            return $"Nejsou zadané všechny hodnoty";
+        }
+    }
+
+    public string ZískejPomerObjemKvadru1Kvadru2(Models.Kvadr kvadr1, Models.Kvadr kvadr2)
+    {
+        if (kvadr1.ObjemKvadru != 0 && kvadr2.ObjemKvadru != 0)
+        {
+            var vysledek = Math.Round(kvadr1.ObjemKvadru / kvadr2.ObjemKvadru, 2);
+            return $"{vysledek}";
+        }
+        else
+        {
+            return $"Nejsou zadané všechny hodnoty";
+        }
+    }
+
+
+}
